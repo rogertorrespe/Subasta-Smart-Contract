@@ -36,6 +36,7 @@ contract Auction {
 
     modifier isActive() {
         require(block.timestamp < stopTime && !ended, "Auction is not active");
+        //require(block.timestamp < stopTime && !ended, "Auction is not active");
         _;
     }
 
@@ -54,6 +55,10 @@ contract Auction {
     // Function to place a bid
     function bid() external payable isActive {
         // Ensure bid is greater than 0
+        require(msg.value > 0, "Bid amount must be greater than 0");
+        //uint256 minRequiredBid = highestBid == 0 ? 0 : (highestBid * MIN_BID_INCREMENT) / 100;
+        //require(msg.value > minRequiredBid, "Bid must be at least 5% higher than current highest");
+        
         require(msg.value > 0, "Bid amount must be greater than 0");
 
         // Calculate minimum required bid (5% more than current highest)
